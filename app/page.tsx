@@ -26,7 +26,7 @@ export default function Home() {
           href={WHATSAPP_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-10 flex h-14 items-center justify-center rounded-full bg-accent px-8 text-base font-semibold text-foreground shadow-lg shadow-accent/20 transition-colors hover:bg-accent/90"
+          className="mt-10 flex h-14 items-center justify-center rounded-full bg-accent-strong px-8 text-base font-semibold text-background shadow-lg shadow-accent/20 transition-colors hover:brightness-90"
         >
           Escribime por WhatsApp
         </a>
@@ -85,7 +85,7 @@ export default function Home() {
           </h2>
           <ol className="mx-auto mt-10 grid max-w-4xl gap-8 sm:mt-14 sm:grid-cols-3 sm:gap-6">
             <li className="flex flex-col items-center text-center">
-              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent font-serif text-xl font-semibold text-foreground">
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent-strong font-serif text-xl font-semibold text-background">
                 1
               </span>
               <h3 className="mt-4 font-serif text-lg font-semibold text-foreground">
@@ -96,7 +96,7 @@ export default function Home() {
               </p>
             </li>
             <li className="flex flex-col items-center text-center">
-              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent font-serif text-xl font-semibold text-foreground">
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent-strong font-serif text-xl font-semibold text-background">
                 2
               </span>
               <h3 className="mt-4 font-serif text-lg font-semibold text-foreground">
@@ -107,7 +107,7 @@ export default function Home() {
               </p>
             </li>
             <li className="flex flex-col items-center text-center">
-              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent font-serif text-xl font-semibold text-foreground">
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent-strong font-serif text-xl font-semibold text-background">
                 3
               </span>
               <h3 className="mt-4 font-serif text-lg font-semibold text-foreground">
@@ -132,7 +132,7 @@ export default function Home() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex h-12 items-center justify-center rounded-full bg-accent px-6 text-foreground transition-colors hover:bg-accent/90"
+            className="flex h-12 items-center justify-center rounded-full bg-accent-strong px-6 text-background transition-colors hover:brightness-90"
           >
             WhatsApp
           </a>
