@@ -4,6 +4,10 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
   output: "export",
+  // Needed so /admin (Decap CMS, served from public/admin/index.html) and
+  // routes like /muebles resolve as folder + index.html both in `next dev`
+  // and on the static host, instead of 404ing on the bare path.
+  trailingSlash: true,
   images: {
     unoptimized: true,
   },

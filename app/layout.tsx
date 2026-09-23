@@ -22,6 +22,7 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://flipmimueble.com"),
   title: "Flipping de muebles",
   description:
     "Restauro muebles con historia · CABA. Foto por DM y vemos: hola@flipmimueble.com",

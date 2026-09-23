@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { AnimatePresence, m } from "motion/react";
 
 export default function StickyNav({
@@ -35,14 +36,22 @@ export default function StickyNav({
             <span className="font-mono text-xs tracking-[0.2em] text-foreground uppercase">
               Flipmimueble
             </span>
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex h-10 items-center justify-center rounded-full bg-accent-strong px-5 text-sm font-semibold text-background transition-colors hover:brightness-90"
-            >
-              Escribime
-            </a>
+            <div className="flex items-center gap-4">
+              <Link
+                href="/muebles/"
+                className="hidden font-mono text-xs tracking-[0.2em] text-foreground/80 uppercase transition-colors hover:text-accent-strong sm:inline"
+              >
+                Muebles
+              </Link>
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-10 items-center justify-center rounded-full bg-accent-strong px-5 text-sm font-semibold text-background transition-colors hover:brightness-90"
+              >
+                Escribime
+              </a>
+            </div>
           </div>
         </m.div>
       ) : null}

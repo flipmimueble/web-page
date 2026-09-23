@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flipping de muebles — Admin</title>
+  </head>
+  <body>
+    <div id="nc-root"></div>
+    <!--
+      Decap CMS bootstrap. ^3.0.0 auto-resolves to the latest 3.x release
+      from unpkg. The script tag must come after #nc-root, at the end of
+      body: with it in <head> (the pattern shown in older Decap/Netlify CMS
+      examples), decap-cms.js throws "Cannot read properties of null
+      (reading 'appendChild')" on init because it tries to mount before
+      <body> exists yet. Confirmed by testing directly against unpkg with
+      both the pinned 3.10.0 and the current 3.16.3 release — reproducible
+      every time with the script in <head>, gone every time with it here.
+    -->
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  </body>
+</html>

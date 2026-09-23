@@ -1,0 +1,80 @@
+# Decap CMS config for Flipping de muebles.
+#
+# TODO: confirm exact DecapBridge backend config from https://decapbridge.com/docs
+# before this works. DecapBridge's docs (introduction, getting-started) describe
+# registering the site in their dashboard and copying a generated config.yml from
+# there, but do not publish the literal `backend:` block anywhere fetchable ahead
+# of that signup step. The block below is a best-effort placeholder modeled on
+# how OAuth-proxy backends (Netlify's git-gateway / OAuth proxy pattern) usually
+# wire into Decap: a `github` backend pointed at DecapBridge's API as the
+# base_url, with DecapBridge issuing the OAuth token instead of GitHub directly.
+# Replace this whole block with whatever DecapBridge's dashboard generates once
+# the repo is registered there.
+backend:
+  name: github
+  repo: flipmimueble/web-page
+  branch: main
+  base_url: https://api.decapbridge.com
+  auth_endpoint: auth
+
+# Spanish admin UI — Mica isn't a technical English speaker.
+locale: "es"
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "piezas"
+    label: "Piezas"
+    label_singular: "Pieza"
+    folder: "content/piezas"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título", name: "titulo", widget: "string" }
+      - { label: "Resumen", name: "resumen", widget: "text" }
+      - {
+          label: "Foto antes",
+          name: "fotoAntes",
+          widget: "image",
+          required: false,
+          media_folder: "/public/uploads/piezas/{{slug}}",
+          public_folder: "/uploads/piezas/{{slug}}",
+        }
+      - {
+          label: "Foto después",
+          name: "fotoDespues",
+          widget: "image",
+          required: false,
+          media_folder: "/public/uploads/piezas/{{slug}}",
+          public_folder: "/uploads/piezas/{{slug}}",
+        }
+      - {
+          label: "Fotos adicionales",
+          name: "fotos",
+          widget: "list",
+          required: false,
+          field:
+            {
+              label: "Foto",
+              name: "foto",
+              widget: "image",
+              media_folder: "/public/uploads/piezas/{{slug}}",
+              public_folder: "/uploads/piezas/{{slug}}",
+            },
+        }
+      - { label: "Materiales", name: "materiales", widget: "string", required: false }
+      - {
+          label: "Estado",
+          name: "estado",
+          widget: "select",
+          options:
+            [
+              { label: "Disponible", value: "disponible" },
+              { label: "Vendido", value: "vendido" },
+              { label: "A pedido", value: "a-pedido" },
+              { label: "En proceso", value: "proceso" },
+            ],
+        }
+      - { label: "Fecha", name: "fecha", widget: "datetime" }
+      - { label: "Historia", name: "body", widget: "markdown", required: false }

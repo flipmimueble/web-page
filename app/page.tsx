@@ -1,43 +1,14 @@
-import mesita from "./_assets/fotos/mesita-antes-despues.jpg";
-import procesoSilla from "./_assets/fotos/proceso-silla-pintando.jpg";
-import sillaAntes from "./_assets/fotos/silla-antes.jpg";
+import Link from "next/link";
 import StickyNav from "./_components/StickyNav";
 import ParallaxImage from "./_components/ParallaxImage";
 import Reveal from "./_components/Reveal";
 import Ficha from "./_components/Ficha";
+import { ESTADO_LABELS, getAllPiezas, getPiezaFotoPrincipal } from "./_lib/piezas";
 
 const WHATSAPP_URL =
   "https://wa.me/5491150157010?text=Hola%21%20Te%20mando%20una%20foto%20de%20mi%20mueble%20%F0%9F%A4%97";
 const EMAIL = "hola@flipmimueble.com";
 const INSTAGRAM_URL = "https://instagram.com/flipmimueble";
-
-const TALLER_PIEZAS = [
-  {
-    src: mesita,
-    alt: "Mesita de pino antes y después de la restauración, pintada de blanco con manija dorada y patas con puntas en borravino",
-    numero: "01",
-    pieza: "Mesita de luz",
-    detalle: "Pino, blanco + borravino",
-    caption:
-      "Mesita de pino restaurada en blanco, con detalle en borravino y manija dorada.",
-  },
-  {
-    src: procesoSilla,
-    alt: "Pincel y frasco de pintura junto al respaldo de una silla de madera, con uno de los barrotes ya pintado en borravino y el resto sin pintar, planta de fondo",
-    numero: "02",
-    pieza: "Silla — proceso",
-    detalle: "Pintura a mano, barrote a barrote",
-    caption: "Pintando a mano los barrotes de una silla, en el taller.",
-  },
-  {
-    src: sillaAntes,
-    alt: "Silla antigua con pintura blanca descascarada y asiento de madera desgastado, vista desde arriba, antes de restaurar",
-    numero: "03",
-    pieza: "Silla — antes",
-    detalle: "Estado de ingreso",
-    caption: "Antes de restaurar: una silla que llegó con años encima.",
-  },
-];
 
 const PASOS = [
   {
@@ -59,6 +30,8 @@ const PASOS = [
 ];
 
 export default function Home() {
+  const tallerPiezas = getAllPiezas().slice(0, 3);
+
   return (
     <div className="flex flex-1 flex-col">
       <StickyNav whatsappUrl={WHATSAPP_URL} />
@@ -131,37 +104,54 @@ export default function Home() {
           </h2>
 
           <div className="flex flex-col gap-20 sm:gap-32">
-            {TALLER_PIEZAS.map((pieza, index) => (
-              <Reveal key={pieza.numero}>
-                <figure
-                  className={`flex flex-col gap-6 sm:gap-10 ${
-                    index % 2 === 1
-                      ? "sm:flex-row-reverse"
-                      : "sm:flex-row"
-                  } sm:items-end`}
-                >
-                  <div className="w-full sm:w-2/3">
-                    <ParallaxImage
-                      src={pieza.src}
-                      alt={pieza.alt}
-                      sizes="(min-width: 640px) 66vw, 100vw"
-                    />
-                  </div>
-                  <div className="w-full px-6 sm:w-1/3 sm:px-0">
-                    <Ficha
-                      title={pieza.numero}
-                      rows={[
-                        { label: "Pieza", value: pieza.pieza },
-                        { label: "Detalle", value: pieza.detalle },
-                      ]}
-                    />
-                    <figcaption className="mt-4 text-sm text-foreground/70 sm:text-base">
-                      {pieza.caption}
-                    </figcaption>
-                  </div>
-                </figure>
-              </Reveal>
-            ))}
+            {tallerPiezas.map((pieza, index) => {
+              const numero = String(index + 1).padStart(2, "0");
+              const foto = getPiezaFotoPrincipal(pieza);
+              const rows = [
+                { label: "Pieza", value: pieza.titulo },
+                { label: "Estado", value: ESTADO_LABELS[pieza.estado] },
+              ];
+              if (pieza.materiales) {
+                rows.push({ label: "Detalle", value: pieza.materiales });
+              }
+
+              return (
+                <Reveal key={pieza.slug}>
+                  <figure
+                    className={`flex flex-col gap-6 sm:gap-10 ${
+                      index % 2 === 1
+                        ? "sm:flex-row-reverse"
+                        : "sm:flex-row"
+                    } sm:items-end`}
+                  >
+                    <div className="w-full sm:w-2/3">
+                      {foto ? (
+                        <ParallaxImage
+                          src={foto}
+                          alt={pieza.resumen}
+                          sizes="(min-width: 640px) 66vw, 100vw"
+                        />
+                      ) : null}
+                    </div>
+                    <div className="w-full px-6 sm:w-1/3 sm:px-0">
+                      <Ficha title={numero} rows={rows} />
+                      <figcaption className="mt-4 text-sm text-foreground/70 sm:text-base">
+                        {pieza.resumen}
+                      </figcaption>
+                    </div>
+                  </figure>
+                </Reveal>
+              );
+            })}
+          </div>
+
+          <div className="mx-auto mt-16 max-w-6xl px-6 sm:px-10">
+            <Link
+              href="/muebles/"
+              className="inline-flex items-center gap-2 font-mono text-xs tracking-[0.2em] text-foreground uppercase underline decoration-foreground/30 underline-offset-4 transition-colors hover:text-accent-strong"
+            >
+              Ver todas las piezas →
+            </Link>
           </div>
         </section>
 
