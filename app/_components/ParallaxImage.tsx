@@ -10,7 +10,7 @@ export default function ParallaxImage({
   src,
   alt,
   sizes,
-  aspectClassName = "aspect-[4/5] sm:aspect-[16/10]",
+  aspectClassName = "aspect-[3/4]",
 }: {
   src: StaticImageData;
   alt: string;

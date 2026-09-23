@@ -20,9 +20,6 @@ const TALLER_PIEZAS = [
     detalle: "Pino, blanco + borravino",
     caption:
       "Mesita de pino restaurada en blanco, con detalle en borravino y manija dorada.",
-    // Pre-designed antes/después composite (with baked-in text) — keep its
-    // natural portrait ratio instead of the wide crop used for plain photos.
-    aspectClassName: "aspect-[3/4]",
   },
   {
     src: procesoSilla,
@@ -148,7 +145,6 @@ export default function Home() {
                       src={pieza.src}
                       alt={pieza.alt}
                       sizes="(min-width: 640px) 66vw, 100vw"
-                      aspectClassName={pieza.aspectClassName}
                     />
                   </div>
                   <div className="w-full px-6 sm:w-1/3 sm:px-0">
