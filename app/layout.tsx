@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Fraunces } from "next/font/google";
+import "lenis/dist/lenis.css";
 import "./globals.css";
+import MotionProvider from "./_components/MotionProvider";
+import SmoothScroll from "./_components/SmoothScroll";
+import Grain from "./_components/Grain";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,7 +33,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="es"
       className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <noscript>
+          <style>{`[data-reveal] { opacity: 1 !important; transform: none !important; }`}</style>
+        </noscript>
+        <MotionProvider>
+          <SmoothScroll>{children}</SmoothScroll>
+        </MotionProvider>
+        <Grain />
+      </body>
     </html>
   );
 }
