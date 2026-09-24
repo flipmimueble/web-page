@@ -82,6 +82,7 @@ collections:
           label: "Estado",
           name: "estado",
           widget: "select",
+          default: "disponible",
           options:
             [
               { label: "Disponible", value: "disponible" },
@@ -90,5 +91,5 @@ collections:
               { label: "En proceso", value: "proceso" },
             ],
         }
-      - { label: "Fecha", name: "fecha", widget: "datetime" }
+      - { label: "Fecha", name: "fecha", widget: "datetime", default: "{{now}}" }
       - { label: "Historia", name: "body", widget: "markdown", required: false }
