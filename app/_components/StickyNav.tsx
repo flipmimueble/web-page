@@ -7,8 +7,9 @@ import { AnimatePresence, m } from "motion/react";
 
 const NAV_LINKS = [
   { href: "/", label: "Inicio" },
-  { href: "/quienes-somos/", label: "Quiénes somos" },
   { href: "/muebles/", label: "Productos" },
+  { href: "/#como-funciona", label: "Cómo funciona" },
+  { href: "/quienes-somos/", label: "Quiénes somos" },
   { href: "/contacto/", label: "Contacto" },
 ];
 

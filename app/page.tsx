@@ -2,8 +2,7 @@ import Link from "next/link";
 import StickyNav from "./_components/StickyNav";
 import ParallaxImage from "./_components/ParallaxImage";
 import Reveal from "./_components/Reveal";
-import Ficha from "./_components/Ficha";
-import { ESTADO_LABELS, getAllPiezas, getPiezaFotoPrincipal } from "./_lib/piezas";
+import { getAllPiezas, getPiezaFotoPrincipal } from "./_lib/piezas";
 
 const WHATSAPP_URL =
   "https://wa.me/5491150157010?text=Hola%21%20Te%20mando%20una%20foto%20de%20mi%20mueble%20%F0%9F%A4%97";
@@ -80,44 +79,18 @@ export default function Home() {
             El taller
           </h2>
 
-          <div className="flex flex-col gap-20 sm:gap-32">
-            {tallerPiezas.map((pieza, index) => {
+          <div className="mx-auto flex max-w-6xl flex-col gap-6 px-6 sm:gap-10 sm:px-10">
+            {tallerPiezas.map((pieza) => {
               const foto = getPiezaFotoPrincipal(pieza);
-              const rows = [
-                { label: "Estado", value: ESTADO_LABELS[pieza.estado] },
-              ];
-              if (pieza.materiales) {
-                rows.push({ label: "Materiales", value: pieza.materiales });
-              }
+              if (!foto) return null;
 
               return (
                 <Reveal key={pieza.slug}>
-                  <figure
-                    className={`flex flex-col gap-6 sm:gap-10 ${
-                      index % 2 === 1
-                        ? "sm:flex-row-reverse"
-                        : "sm:flex-row"
-                    } sm:items-end`}
-                  >
-                    <div className="w-full sm:w-2/3">
-                      {foto ? (
-                        <ParallaxImage
-                          src={foto}
-                          alt={pieza.resumen}
-                          sizes="(min-width: 640px) 66vw, 100vw"
-                        />
-                      ) : null}
-                    </div>
-                    <div className="w-full px-6 sm:w-1/3 sm:px-0">
-                      <p className="font-serif text-xl font-semibold text-foreground">
-                        {pieza.titulo}
-                      </p>
-                      <Ficha rows={rows} className="mt-3" />
-                      <figcaption className="mt-4 text-sm text-foreground/70 sm:text-base">
-                        {pieza.resumen}
-                      </figcaption>
-                    </div>
-                  </figure>
+                  <ParallaxImage
+                    src={foto}
+                    alt={pieza.titulo}
+                    sizes="(min-width: 640px) 80vw, 100vw"
+                  />
                 </Reveal>
               );
             })}
@@ -134,7 +107,10 @@ export default function Home() {
         </section>
 
         {/* CÓMO FUNCIONA */}
-        <section className="border-t border-foreground/10 px-6 py-24 sm:px-10 sm:py-32">
+        <section
+          id="como-funciona"
+          className="scroll-mt-24 border-t border-foreground/10 px-6 py-24 sm:px-10 sm:py-32"
+        >
           <div className="mx-auto max-w-6xl">
             <h2 className="mb-12 font-serif text-2xl font-semibold text-foreground sm:text-3xl">
               Cómo funciona
