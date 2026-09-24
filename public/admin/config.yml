@@ -52,16 +52,16 @@ collections:
           name: "fotoAntes",
           widget: "image",
           required: false,
-          media_folder: "/public/uploads/piezas/{{slug}}",
-          public_folder: "/uploads/piezas/{{slug}}",
+          media_folder: "/public/uploads/piezas",
+          public_folder: "/uploads/piezas",
         }
       - {
           label: "Foto después",
           name: "fotoDespues",
           widget: "image",
           required: false,
-          media_folder: "/public/uploads/piezas/{{slug}}",
-          public_folder: "/uploads/piezas/{{slug}}",
+          media_folder: "/public/uploads/piezas",
+          public_folder: "/uploads/piezas",
         }
       - {
           label: "Fotos adicionales",
@@ -73,8 +73,8 @@ collections:
               label: "Foto",
               name: "foto",
               widget: "image",
-              media_folder: "/public/uploads/piezas/{{slug}}",
-              public_folder: "/uploads/piezas/{{slug}}",
+              media_folder: "/public/uploads/piezas",
+              public_folder: "/uploads/piezas",
             },
         }
       - { label: "Materiales", name: "materiales", widget: "string", required: false }
