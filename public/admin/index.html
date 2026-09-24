@@ -11,18 +11,20 @@
       Decap CMS bootstrap. Pinned to an exact version rather than floating
       on ^3.0.0 (which auto-resolves to whatever the latest 3.x is on
       unpkg): floating meant every editor session silently picked up
-      upstream changes with no way to know what shipped. There's a known
-      image-preview regression upstream (blob-URL/broken-thumbnail bug
-      reported since 3.8.4, still present in 3.16.3 and in 3.16.0 —
-      confirmed by testing both here against this repo's git-gateway/
-      DecapBridge backend: https://github.com/decaporg/decap-cms/issues/7639).
-      Pinned to 3.8.0, the version upstream confirms predates the bug.
-      3.8.0 predates the git-gateway PKCE session-restore-on-reload fix
-      that landed in 3.16.0 (needed for DecapBridge's email/password
-      login) — so if logging in or staying logged in across a page reload
-      breaks, that's why; revert this pin to 3.16.0 (still broken image
-      preview, but login works) or investigate further before going back
-      to floating on latest.
+      upstream changes with no way to know what shipped.
+
+      DO NOT drop below 3.16.0. Tried 3.8.0 to work around a known
+      upstream image-preview bug (blob-URL/broken-thumbnail, reported
+      since 3.8.4, still present as of 3.16.3:
+      https://github.com/decaporg/decap-cms/issues/7639) — 3.8.0 also
+      broke the Google login option in DecapBridge's auth screen, so it
+      was reverted back to 3.16.0 the same day. The image-preview bug is
+      still unresolved on 3.16.0 (a freshly-picked, not-yet-published
+      image shows broken instead of a local/blob preview) — that's a
+      known trade-off, not a regression from this pin. If revisiting this,
+      re-verify BOTH the Google login button and the image preview before
+      changing the version, and confirm with the site owner before
+      testing anything below 3.16.0 given how easily this breaks login.
       The script tag must come after #nc-root, at the end of body: with it
       in <head> (the pattern shown in older Decap/Netlify CMS examples),
       decap-cms.js throws "Cannot read properties of null (reading
@@ -31,6 +33,6 @@
       the pinned 3.10.0 and the 3.16.3 release — reproducible every time
       with the script in <head>, gone every time with it here.
     -->
-    <script src="https://unpkg.com/decap-cms@3.8.0/dist/decap-cms.js"></script>
+    <script src="https://unpkg.com/decap-cms@3.16.0/dist/decap-cms.js"></script>
   </body>
 </html>
