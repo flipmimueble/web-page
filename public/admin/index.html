@@ -41,19 +41,31 @@
       // start from an empty form, not the previous entry's data.
       //
       // Decap CMS navigates to the saved entry's own URL right after
-      // save/publish, in the same tick as these events fire — a bare hash
-      // assignment here lost that race and got immediately overwritten.
-      // Deferring with setTimeout(0) runs after Decap's own navigation, so
-      // ours wins. Hooked on both postSave and postPublish since it's
-      // unclear which one this git-gateway/simple-workflow setup actually
-      // fires for the "Publish" button.
-      function goToNewPieza() {
-        setTimeout(() => {
-          window.location.hash = "#/collections/piezas/new";
-        }, 0);
+      // save/publish — but not necessarily in the same tick as these
+      // events fire, so a single deferred write (even via setTimeout)
+      // could still lose that race depending on how Decap's own
+      // navigation is scheduled internally. Instead, force our target
+      // hash repeatedly for a couple seconds after save: whichever write
+      // (ours or Decap's) happens last within that window, ours always
+      // comes around again shortly after and wins for good. Hooked on
+      // both postSave and postPublish since it's unclear which one this
+      // git-gateway/simple-workflow setup actually fires for the
+      // "Publish" button.
+      const NEW_PIEZA_HASH = "#/collections/piezas/new";
+
+      function forceNewPiezaHash() {
+        const attempts = [0, 100, 300, 600, 1000, 1600, 2400];
+        for (const delay of attempts) {
+          setTimeout(() => {
+            if (window.location.hash !== NEW_PIEZA_HASH) {
+              window.location.hash = NEW_PIEZA_HASH;
+            }
+          }, delay);
+        }
       }
-      CMS.registerEventListener({ name: "postSave", handler: goToNewPieza });
-      CMS.registerEventListener({ name: "postPublish", handler: goToNewPieza });
+
+      CMS.registerEventListener({ name: "postSave", handler: forceNewPiezaHash });
+      CMS.registerEventListener({ name: "postPublish", handler: forceNewPiezaHash });
     </script>
   </body>
 </html>
