@@ -34,5 +34,17 @@
       with the script in <head>, gone every time with it here.
     -->
     <script src="https://unpkg.com/decap-cms@3.16.0/dist/decap-cms.js"></script>
+    <script>
+      // After publishing a pieza (new or edited), jump straight to a blank
+      // "new entry" form instead of leaving the just-saved entry open — the
+      // site owner loads several pieces in a row and wants each one to
+      // start from an empty form, not the previous entry's data.
+      CMS.registerEventListener({
+        name: "postSave",
+        handler: () => {
+          window.location.hash = "#/collections/piezas/new";
+        },
+      });
+    </script>
   </body>
 </html>
