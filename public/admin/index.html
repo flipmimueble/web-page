@@ -39,12 +39,21 @@
       // "new entry" form instead of leaving the just-saved entry open — the
       // site owner loads several pieces in a row and wants each one to
       // start from an empty form, not the previous entry's data.
-      CMS.registerEventListener({
-        name: "postSave",
-        handler: () => {
+      //
+      // Decap CMS navigates to the saved entry's own URL right after
+      // save/publish, in the same tick as these events fire — a bare hash
+      // assignment here lost that race and got immediately overwritten.
+      // Deferring with setTimeout(0) runs after Decap's own navigation, so
+      // ours wins. Hooked on both postSave and postPublish since it's
+      // unclear which one this git-gateway/simple-workflow setup actually
+      // fires for the "Publish" button.
+      function goToNewPieza() {
+        setTimeout(() => {
           window.location.hash = "#/collections/piezas/new";
-        },
-      });
+        }, 0);
+      }
+      CMS.registerEventListener({ name: "postSave", handler: goToNewPieza });
+      CMS.registerEventListener({ name: "postPublish", handler: goToNewPieza });
     </script>
   </body>
 </html>
