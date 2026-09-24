@@ -80,8 +80,18 @@ jobs:
     permissions:
       contents: read
     steps:
+      # actions/checkout defaults to the SHA that triggered this run, which
+      # is frozen even after prepare-uploads pushes a new commit on top of
+      # it (that push doesn't retrigger the workflow — GitHub doesn't chain
+      # workflow runs off the default GITHUB_TOKEN, to avoid infinite
+      # loops). Without `ref: main` here, this job would build from the
+      # pre-prune/pre-optimize tree, so a just-deleted pieza's photo (or an
+      # unoptimized upload) would still ship live until some later, human
+      # triggered push happened to build on top of it.
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          ref: main
 
       - name: Enable Corepack
         run: corepack enable
