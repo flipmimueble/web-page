@@ -8,15 +8,26 @@
   <body>
     <div id="nc-root"></div>
     <!--
-      Decap CMS bootstrap. ^3.0.0 auto-resolves to the latest 3.x release
-      from unpkg. The script tag must come after #nc-root, at the end of
-      body: with it in <head> (the pattern shown in older Decap/Netlify CMS
-      examples), decap-cms.js throws "Cannot read properties of null
-      (reading 'appendChild')" on init because it tries to mount before
-      <body> exists yet. Confirmed by testing directly against unpkg with
-      both the pinned 3.10.0 and the current 3.16.3 release — reproducible
-      every time with the script in <head>, gone every time with it here.
+      Decap CMS bootstrap. Pinned to an exact version rather than floating
+      on ^3.0.0 (which auto-resolves to whatever the latest 3.x is on
+      unpkg): floating meant every editor session silently picked up
+      upstream changes with no way to know what shipped. Pinned to 3.16.0
+      specifically to sidestep a known image-preview regression present in
+      3.16.3 (blob-URL/broken-thumbnail bug reported upstream since 3.8.4,
+      https://github.com/decaporg/decap-cms/issues/7639) while keeping the
+      git-gateway PKCE session-restore-on-reload fix that landed in 3.16.0
+      (needed for DecapBridge's email/password login). If image previews
+      are still broken on this version, the next thing to try is an older
+      pin (e.g. 3.8.0, the version upstream confirms is unaffected) — but
+      that predates the PKCE fix, so re-test login carefully after.
+      The script tag must come after #nc-root, at the end of body: with it
+      in <head> (the pattern shown in older Decap/Netlify CMS examples),
+      decap-cms.js throws "Cannot read properties of null (reading
+      'appendChild')" on init because it tries to mount before <body>
+      exists yet. Confirmed by testing directly against unpkg with both
+      the pinned 3.10.0 and the 3.16.3 release — reproducible every time
+      with the script in <head>, gone every time with it here.
     -->
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script src="https://unpkg.com/decap-cms@3.16.0/dist/decap-cms.js"></script>
   </body>
 </html>
