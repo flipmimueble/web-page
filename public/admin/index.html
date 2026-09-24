@@ -11,15 +11,18 @@
       Decap CMS bootstrap. Pinned to an exact version rather than floating
       on ^3.0.0 (which auto-resolves to whatever the latest 3.x is on
       unpkg): floating meant every editor session silently picked up
-      upstream changes with no way to know what shipped. Pinned to 3.16.0
-      specifically to sidestep a known image-preview regression present in
-      3.16.3 (blob-URL/broken-thumbnail bug reported upstream since 3.8.4,
-      https://github.com/decaporg/decap-cms/issues/7639) while keeping the
-      git-gateway PKCE session-restore-on-reload fix that landed in 3.16.0
-      (needed for DecapBridge's email/password login). If image previews
-      are still broken on this version, the next thing to try is an older
-      pin (e.g. 3.8.0, the version upstream confirms is unaffected) — but
-      that predates the PKCE fix, so re-test login carefully after.
+      upstream changes with no way to know what shipped. There's a known
+      image-preview regression upstream (blob-URL/broken-thumbnail bug
+      reported since 3.8.4, still present in 3.16.3 and in 3.16.0 —
+      confirmed by testing both here against this repo's git-gateway/
+      DecapBridge backend: https://github.com/decaporg/decap-cms/issues/7639).
+      Pinned to 3.8.0, the version upstream confirms predates the bug.
+      3.8.0 predates the git-gateway PKCE session-restore-on-reload fix
+      that landed in 3.16.0 (needed for DecapBridge's email/password
+      login) — so if logging in or staying logged in across a page reload
+      breaks, that's why; revert this pin to 3.16.0 (still broken image
+      preview, but login works) or investigate further before going back
+      to floating on latest.
       The script tag must come after #nc-root, at the end of body: with it
       in <head> (the pattern shown in older Decap/Netlify CMS examples),
       decap-cms.js throws "Cannot read properties of null (reading
@@ -28,6 +31,6 @@
       the pinned 3.10.0 and the 3.16.3 release — reproducible every time
       with the script in <head>, gone every time with it here.
     -->
-    <script src="https://unpkg.com/decap-cms@3.16.0/dist/decap-cms.js"></script>
+    <script src="https://unpkg.com/decap-cms@3.8.0/dist/decap-cms.js"></script>
   </body>
 </html>
