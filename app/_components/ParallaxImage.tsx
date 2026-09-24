@@ -49,13 +49,13 @@ export default function ParallaxImage({
       ref={containerRef}
       className={`relative w-full overflow-hidden ${aspectClassName}`}
     >
-      <m.div style={{ y }} className="absolute inset-0 -top-[8%] -bottom-[8%]">
+      <m.div style={{ y }} className="absolute inset-0">
         <Image
           src={src}
           alt={alt}
           fill
           sizes={sizes}
-          className="object-cover"
+          className="object-contain"
         />
       </m.div>
     </div>
