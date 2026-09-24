@@ -69,7 +69,7 @@ export default async function PiezaPage({
         <div className="mx-auto max-w-6xl">
           <Link
             href="/muebles/"
-            className="font-mono text-xs tracking-[0.2em] text-foreground/70 uppercase transition-colors hover:text-accent-strong"
+            className="text-sm text-foreground/70 transition-colors hover:text-brand-strong"
           >
             ← Todas las piezas
           </Link>
@@ -90,9 +90,7 @@ export default async function PiezaPage({
                     alt={`${pieza.titulo} — antes`}
                     sizes="(min-width: 640px) 50vw, 100vw"
                   />
-                  <span className="font-mono text-xs tracking-[0.2em] text-foreground/70 uppercase">
-                    Antes
-                  </span>
+                  <span className="text-sm text-foreground/70">Antes</span>
                 </div>
               </Reveal>
             ) : null}
@@ -104,16 +102,14 @@ export default async function PiezaPage({
                     alt={`${pieza.titulo} — después`}
                     sizes="(min-width: 640px) 50vw, 100vw"
                   />
-                  <span className="font-mono text-xs tracking-[0.2em] text-foreground/70 uppercase">
-                    Después
-                  </span>
+                  <span className="text-sm text-foreground/70">Después</span>
                 </div>
               </Reveal>
             ) : null}
           </div>
 
           <div className="grid gap-10 sm:grid-cols-[1fr_2fr] sm:items-start">
-            <Ficha title="Ficha" rows={rows} />
+            <Ficha rows={rows} />
 
             <div className="flex flex-col gap-6">
               <p className="text-lg text-foreground/80 sm:text-xl">
@@ -128,7 +124,7 @@ export default async function PiezaPage({
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-12 w-fit items-center justify-center rounded-full bg-accent-strong px-6 text-sm font-semibold text-background transition-colors hover:brightness-90"
+                className="flex h-12 w-fit items-center justify-center rounded-full bg-brand px-6 text-sm font-semibold text-background transition-colors hover:bg-brand-strong"
               >
                 Me interesa — escribime por WhatsApp
               </a>
@@ -138,7 +134,7 @@ export default async function PiezaPage({
       </main>
 
       <footer className="border-t border-foreground/10 px-6 py-10 text-center sm:px-10">
-        <p className="font-mono text-xs tracking-[0.2em] text-foreground/70 uppercase">
+        <p className="text-xs text-foreground/70">
           Flipping de muebles · CABA
         </p>
       </footer>

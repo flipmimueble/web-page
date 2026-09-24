@@ -24,10 +24,7 @@ export default function MueblesPage() {
 
       <header className="px-6 pt-16 pb-10 sm:px-10 sm:pt-24">
         <div className="mx-auto max-w-6xl">
-          <div className="font-mono text-xs tracking-[0.2em] text-foreground/70 uppercase">
-            Ficha de ingreso — Muebles
-          </div>
-          <h1 className="mt-6 font-serif text-4xl leading-tight font-semibold tracking-tight text-foreground sm:text-6xl">
+          <h1 className="font-serif text-4xl leading-tight font-semibold tracking-tight text-foreground sm:text-6xl">
             Todas las piezas
           </h1>
           <p className="mt-4 max-w-xl text-base text-foreground/70 sm:text-lg">
@@ -40,7 +37,6 @@ export default function MueblesPage() {
       <main className="px-6 pb-24 sm:px-10 sm:pb-32">
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-16 border-t border-foreground/10 pt-16 sm:grid-cols-2 sm:gap-20">
           {piezas.map((pieza, index) => {
-            const numero = String(index + 1).padStart(2, "0");
             const foto = getPiezaFotoPrincipal(pieza);
             const rows = [
               { label: "Estado", value: ESTADO_LABELS[pieza.estado] },
@@ -60,10 +56,10 @@ export default function MueblesPage() {
                         sizes="(min-width: 640px) 50vw, 100vw"
                       />
                     ) : null}
-                    <Ficha title={numero} rows={rows} />
-                    <figcaption className="font-serif text-xl font-semibold text-foreground transition-colors group-hover:text-accent-strong sm:text-2xl">
+                    <figcaption className="font-serif text-xl font-semibold text-foreground transition-colors group-hover:text-brand-strong sm:text-2xl">
                       {pieza.titulo}
                     </figcaption>
+                    <Ficha rows={rows} />
                   </figure>
                 </Link>
               </Reveal>
@@ -73,7 +69,7 @@ export default function MueblesPage() {
       </main>
 
       <footer className="border-t border-foreground/10 px-6 py-10 text-center sm:px-10">
-        <p className="font-mono text-xs tracking-[0.2em] text-foreground/70 uppercase">
+        <p className="text-xs text-foreground/70">
           Flipping de muebles · CABA
         </p>
       </footer>
